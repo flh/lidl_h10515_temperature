@@ -34,13 +34,10 @@ The checksum is obtained by:
 
 ### Temperature reading
 
-The temperature is encoded as integer in bits number 9 to 12 (12 is the
-most significant bit of the integer). The integer represents tenth of
-degrees reading (i.e., integer 193 is sent when the temperature is
-19.3°C).
-
-I haven't yet enough measurements to determine how negative temperatures
-are encoded.
+The temperature is encoded as a 12-bit signed integer in bits number 12
+to 23 (22 is the most significant bit of the integer, 23 is the sign
+bit). The integer represents tenth of degrees reading (i.e., integer 193
+is sent when the temperature is 19.3°C).
 
 ### Other parts
 

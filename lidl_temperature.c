@@ -64,10 +64,15 @@ uint_least64_t lidl_poll_signal(struct gpiod_chip *gpiochip, struct gpiod_line *
 
 float lidl_decode_temperature(uint_least64_t signal) {
   unsigned int raw_temperature = 0;
-  for(char i = 0; i < 9; i++) {
+  for(char i = 0; i < 11; i++) {
     raw_temperature = raw_temperature * 2 + ((signal >> (i + 12)) & 1);
   }
-  return (float)raw_temperature / 10.;
+  if(signal >> 24 & 1 == 0) {
+    return (float)raw_temperature / 10.;
+  }
+  else {
+    return (float)~raw_temperature / (-10.);
+  }
 }
 
 bool lidl_checksum(uint_least64_t signal) {
